@@ -51,6 +51,11 @@ class Runtime {
      *                          to load
      */
     public static void load() {
+        String vendor = System.getProperty("java.vendor").toLowerCase(Locale.ENGLISH);
+        if (vendor.contains("android")) {
+            System.loadLibrary("ngrok_java");
+            return;
+        }
         String filename = getLibname();
         String tempDir = System.getProperty("java.io.tmpdir");
         File temporaryDir = new File(tempDir, "libngrok_" + System.nanoTime());
